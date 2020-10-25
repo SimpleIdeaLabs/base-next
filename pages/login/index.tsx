@@ -1,4 +1,4 @@
-import { Button, createStyles, Grid, makeStyles, Paper, TextField, Theme } from "@material-ui/core";
+import { Button, Container, createStyles, Grid, makeStyles, Paper, TextField, Theme } from "@material-ui/core";
 import Head from "next/head";
 import React, { useState } from "react";
 import MainLayout from "../../src/layouts/main.layout";
@@ -10,13 +10,16 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      paddingTop: theme.spacing(10)
+      paddingTop: theme.spacing(5)
     },
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
+    formFieldContainer: {
+      padding: theme.spacing(2)
+    }
   }),
 );
 
@@ -39,7 +42,7 @@ export default function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      <div className={classes.root}>
+      <Container className={classes.root}>
         <Grid
           container
           alignItems='center'
@@ -48,16 +51,22 @@ export default function Login() {
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <form noValidate autoComplete="off">
-                <TextField label="Emails" type='email' fullWidth onChange={e => setForm({ ...form, email: e.target.value  })} /> <br/>
-                <TextField label="Password" type='password' fullWidth onChange={e => setForm({ ...form, password: e.target.value  })}/> <br/>
-                <Button variant="contained" color="primary" fullWidth onClick={handleLogin}>
-                  Login
-                </Button>
+                <div className={classes.formFieldContainer}>
+                  <TextField label="Emails" type='email' fullWidth onChange={e => setForm({ ...form, email: e.target.value })} />
+                </div>
+                <div className={classes.formFieldContainer}>
+                  <TextField label="Password" type='password' fullWidth onChange={e => setForm({ ...form, password: e.target.value })} />
+                </div>
+                <div className={classes.formFieldContainer}>
+                  <Button variant="contained" color="primary" fullWidth onClick={handleLogin}>
+                    Login
+                  </Button>
+                </div>
               </form>
             </Paper>
           </Grid>
         </Grid>
-      </div>
+      </Container>
     </MainLayout>
   );
 }
